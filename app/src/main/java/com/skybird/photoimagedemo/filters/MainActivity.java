@@ -16,7 +16,10 @@ import com.skybird.photoimagedemo.R;
 import com.zomato.photofilters.SampleFilters;
 import com.zomato.photofilters.imageprocessors.Filter;
 import com.zomato.photofilters.imageprocessors.subfilters.BrightnessSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.ColorOverlaySubFilter;
 import com.zomato.photofilters.imageprocessors.subfilters.ContrastSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.SaturationSubFilter;
+import com.zomato.photofilters.imageprocessors.subfilters.VignetteSubFilter;
 
 import java.util.List;
 
@@ -67,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements ThumbnailCallback
                 ThumbnailItem t6 = new ThumbnailItem();
                 ThumbnailItem t7 = new ThumbnailItem();
                 ThumbnailItem t8 = new ThumbnailItem();
+                ThumbnailItem t9 = new ThumbnailItem();
+                ThumbnailItem t10 = new ThumbnailItem();
+                ThumbnailItem t11 = new ThumbnailItem();
 
                 t1.image = thumbImage;
                 t2.image = thumbImage;
@@ -76,6 +82,9 @@ public class MainActivity extends AppCompatActivity implements ThumbnailCallback
                 t6.image = thumbImage;
                 t7.image = thumbImage;
                 t8.image = thumbImage;
+                t9.image = thumbImage;
+                t10.image = thumbImage;
+                t11.image = thumbImage;
                 ThumbnailsManager.clearThumbs();
                 ThumbnailsManager.addThumb(t1); // Original Image
 
@@ -94,13 +103,29 @@ public class MainActivity extends AppCompatActivity implements ThumbnailCallback
                 t6.filter = SampleFilters.getNightWhisperFilter();
                 ThumbnailsManager.addThumb(t6);
 
-                t7.filter=new Filter();
+                t7.filter = new Filter();
+                //亮度
                 t7.filter.addSubFilter(new BrightnessSubFilter(80));
                 ThumbnailsManager.addThumb(t7);
 
-                t8.filter=new Filter();
+                t8.filter = new Filter();
+                //对比度
                 t8.filter.addSubFilter(new ContrastSubFilter(1.1f));
                 ThumbnailsManager.addThumb(t8);
+
+                //添加阴影
+                t9.filter = new Filter();
+                t9.filter.addSubFilter(new VignetteSubFilter(MainActivity.this, 250));
+                ThumbnailsManager.addThumb(t9);
+
+                t10.filter = new Filter();
+                t10.filter.addSubFilter(new ColorOverlaySubFilter(100, 1,0.5f,0.7f));
+                ThumbnailsManager.addThumb(t10);
+
+                //饱和度
+                t11.filter = new Filter();
+                t11.filter.addSubFilter(new SaturationSubFilter(0.1f));
+                ThumbnailsManager.addThumb(t11);
 
                 List<ThumbnailItem> thumbs = ThumbnailsManager.processThumbs(context);
 
